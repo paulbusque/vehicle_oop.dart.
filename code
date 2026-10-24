@@ -1,0 +1,88 @@
+abstract class Vehicle {
+  String brand;
+
+  Vehicle(this.brand);
+
+  void startEngine();
+
+  void displayInfo() {
+    print("Vehicle Brand: $brand");
+  }
+}
+
+class Car extends Vehicle {
+  int numberOfDoors;
+
+  Car(String brand, this.numberOfDoors) : super(brand);
+
+  @override
+  void startEngine() {
+    print("$brand car engine starts with a key.");
+  }
+
+  void showDoors() {
+    print("Number of doors: $numberOfDoors");
+  }
+}
+
+
+class Motorcycle extends Vehicle {
+  bool hasSidecar;
+
+  Motorcycle(String brand, this.hasSidecar) : super(brand);
+
+  @override
+  void startEngine() {
+    print("$brand motorcycle engine starts with a kick.");
+  }
+
+  void showSidecar() {
+    print("Has sidecar: $hasSidecar");
+  }
+}
+
+mixin GPSNavigation {
+  void navigate(String destination) {
+    print("GPS is navigating to $destination.");
+  }
+}
+
+class DeliveryDrone with GPSNavigation {
+  String model;
+
+  DeliveryDrone(this.model);
+
+  void deliverPackage() {
+    print("$model is delivering a package.");
+  }
+}
+
+void main() {
+  
+  List<Vehicle> vehicles = [
+    Car("Toyota", 4),
+    Motorcycle("Honda", false),
+  ];
+
+  print("=== VEHICLE INFORMATION ===");
+
+  for (Vehicle vehicle in vehicles) {
+    vehicle.displayInfo();
+    vehicle.startEngine();
+    print("");
+  }
+
+  print("=== ADDITIONAL FEATURES ===");
+
+  Car car = Car("Mitsubishi", 4);
+  car.showDoors();
+
+  Motorcycle motorcycle = Motorcycle("Yamaha", true);
+  motorcycle.showSidecar();
+
+  print("");
+
+  DeliveryDrone drone = DeliveryDrone("DJI");
+  drone.deliverPackage();
+  drone.navigate("School");
+}
